@@ -26,17 +26,17 @@
 			<form id="inputBook">
 				<div class="input">
 					<label for="inputBookTitle">Please input title</label>
-					<input id="inputBookTitle" type="text" required>
+					<input id="inputBookTitle" type="text" placeholder="Title" required>
 				</div>
 				<div class="input">
 					<label for="inputBookAuthor">Please input author name</label>
-					<input id="inputBookAuthor" type="text" required>
+					<input id="inputBookAuthor" type="text" placeholder="Author" required>
 				</div>
 				<div class="input">
 					<label for="inputBookYear">Please input year of release</label>
-					<input id="inputBookYear" type="text" required>
+					<input id="inputBookYear" type="number" placeholder="Year" required>
 				</div>
-				<div class="input">
+				<div class="input checkbox">
 					<label for="inputBookIsComplete">Book complete</label>
 					<input id="inputBookIsComplete" type="checkbox">
 				</div>
@@ -47,25 +47,48 @@
 		<section class="search-section">
 			<h2>Search book</h2>
 			<form id="searchBook">
-				<label for="searchBookTitle">Title of book</label>
-				<input id="searchBookTitle" type="text">
-				<button id="searchSubmit" type="submit">
-					<i class="material-icons">search</i>
-				</button>
+				<label>
+					<input id="searchBookTitle" type="text" placeholder="Search title">
+					<button id="searchSubmit" type="submit">
+						<i class="material-icons">search</i>
+					</button>
+				</label>
 			</form>
 		</section>
 
 		<section class="my-book">
-			<h2>Uncomplete</h2>
+			<h2>Incomplete</h2>
+			<div id="incompleteBooksList" class="book-list">
+				<article class="book-item">
+					<h3>Live Code</h3>
+					<p>Author: Joma ma</p>
+					<p>Year: 2018</p>
+					<div class="action">
+						<button class="green">Complete</button>
+						<button class="red">Delete</button>
+					</div>
+				</article>
+			</div>
 		</section>
 
 		<section class="my-book">
 			<h2>Complete</h2>
+			<div id="completeBooksList" class="book-list">
+				<article class="book-item">
+					<h3>Growth Mindset</h3>
+					<p>Author: Nicko Widjaja</p>
+					<p>Year: 2020</p>
+					<div class="action">
+						<button class="green">Incomplete</button>
+						<button class="red">Delete</button>
+					</div>
+				</article>
+			</div>
 		</section>
 	</main>
 
 	<footer>
-		<p>Copyright &copy; 2022 - <a href="herya.netlify.app">Herya App</a>.</p>
+		<p>Copyright &copy; 2022 - <a href="https://herya.netlify.app">Herya App</a>.</p>
 	</footer>
 
 	<script type="text/javascript" src="./index.js"></script>
