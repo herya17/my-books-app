@@ -1,0 +1,10 @@
+@media screen and (min-width: 768px) {
+	section {
+		margin: 2% 25%;
+		/*border: 1px solid black;*/
+	}
+
+	main {
+		padding: 2% 0;
+	}
+}
