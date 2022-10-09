@@ -38,7 +38,7 @@ section {
 	padding: 0 20px 25px 20px;
 	border: 1px solid;
 	border-color: rgb(0,0,0);
-	border-color: rgba(0,0,0,0.4);
+	border-color: rgba(0,0,0,0.6);
 	border-radius: 15px;
 	background-color: white;
 }
@@ -109,7 +109,7 @@ section {
 .book-item {
 	border: 1px solid;
 	border-color: rgb(0,0,0);
-	border-color: rgba(0,0,0,0.3);
+	border-color: rgba(0,0,0,0.4);
 	border-radius: 15px;
 	padding: 0 17px 17px 17px;
 }
