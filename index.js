@@ -36,7 +36,7 @@ document.addEventListener(RENDER_EVENT, () => {
 });
 
 document.addEventListener(CHECK_STORAGE, () => {
-    if (isStorageExist) {
+    if (!isStorageExist) {
         Swal.fire({
             text: "Your browser is not support web storage",
             icon: "warning",
