@@ -1,11 +1,13 @@
+// import Swal from 'https://cdn.jsdelivr.net/npm/sweetalert2@11/src/sweetalert2.js'
+
 const RENDER_EVENT = "render-todo";
 const EMPTY_MESSAGE = "empty-todo";
 const listTodo = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-    const btnBookSubmit = document.getElementById("bookSubmit");
+    const inputBook = document.getElementById("inputBook");
 
-    btnBookSubmit.addEventListener("click", (event) => {
+    inputBook.addEventListener("submit", (event) => {
         event.preventDefault();
         addTodo();
 
@@ -51,10 +53,10 @@ const makeTodo = (listItem) => {
     textTitle.innerText = title;
 
     const textAuthor = document.createElement("p");
-    textAuthor.innerText = author;
+    textAuthor.innerText = `Author: ${author}`;
 
     const textYear = document.createElement("p");
-    textYear.innerText = year;
+    textYear.innerText = `Release year: ${year}`;
 
     const containerAction = document.createElement("div");
     containerAction.classList.add("action");
@@ -103,7 +105,24 @@ const makeTodo = (listItem) => {
     btnDelete.append(btnDeleteIcon);
 
     btnDelete.addEventListener("click", () => {
-        removeTaks(id);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                removeTaks(id);
+                Swal.fire(
+                    'Deleted!',
+                    'Your book has been deleted.',
+                    'success'
+                )
+            }
+        });
     });
 
     containerAction.append(btnDelete);
