@@ -1,7 +1,5 @@
-// import Swal from 'https://cdn.jsdelivr.net/npm/sweetalert2@11/src/sweetalert2.js'
-
 const RENDER_EVENT = "render-todo";
-const EMPTY_MESSAGE = "empty-todo";
+const SUCCESS_SAVED = "success-saved-sweetalert";
 const listTodo = [];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -11,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
         addTodo();
 
+        document.dispatchEvent(new Event(SUCCESS_SAVED));
         document.dispatchEvent(new Event(RENDER_EVENT));
     });
 });
@@ -30,6 +29,15 @@ document.addEventListener(RENDER_EVENT, () => {
             incompleteBooksList.append(todoElement);
         }
     }
+});
+
+document.addEventListener(SUCCESS_SAVED, () => {
+    Swal.fire({
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1000
+      })
 });
 
 const addTodo = () => {
@@ -107,11 +115,10 @@ const makeTodo = (listItem) => {
     btnDelete.addEventListener("click", () => {
         Swal.fire({
             title: 'Are you sure?',
-            text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#716add',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
