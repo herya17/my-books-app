@@ -5,7 +5,8 @@ const listTodo = [];
 
 document.addEventListener("DOMContentLoaded", () => {
     const btnInputBook = document.getElementById("inputBook");
-    const btnSearchBook = document.getElementById("searchBook");
+    // const btnSearchBook = document.getElementById("searchBook");
+    const searchBookInput = document.getElementById("searchBookInput");
 
     btnInputBook.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -14,8 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
         document.dispatchEvent(new Event(RENDER_EVENT));
     });
 
-    btnSearchBook.addEventListener("submit", (event) => {
-        event.preventDefault();
+    // btnSearchBook.addEventListener("submit", (event) => {
+    //     event.preventDefault();
+    //     searchBook();
+    // });
+
+    searchBookInput.addEventListener("input", () => {
         searchBook();
     });
 
