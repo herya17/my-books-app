@@ -250,14 +250,19 @@ const successAction = (actionMessage) => {
 }
 
 const searchBook = () => {
-    const searchBookInput = document.getElementById("searchBookInput").value.toLowerCase();
+    const searchBookInput = document.getElementById("searchBookInput").value;
     const bookList = document.querySelectorAll("h3");
+
+    if (searchBookInput.length == 0) {
+        document.dispatchEvent(new Event(RENDER_EVENT));
+        return;
+    }
 
     for (let book of bookList) {
         const title = book.textContent.toLowerCase();
         console.log(title);
 
-        if (title.includes(searchBookInput)) {
+        if (title.includes(searchBookInput.toLowerCase())) {
             book.parentElement.style.display = "block";
         } else {
             book.parentElement.style.display = "none";
