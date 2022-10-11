@@ -1,5 +1,4 @@
 const RENDER_EVENT = "render-todo";
-const SUCCESS_SAVED = "success-saved-sweetalert";
 const listTodo = [];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -9,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
         addTodo();
 
-        document.dispatchEvent(new Event(SUCCESS_SAVED));
+        successAction("Your book has been saved");
         document.dispatchEvent(new Event(RENDER_EVENT));
     });
 });
@@ -29,15 +28,6 @@ document.addEventListener(RENDER_EVENT, () => {
             incompleteBooksList.append(todoElement);
         }
     }
-});
-
-document.addEventListener(SUCCESS_SAVED, () => {
-    Swal.fire({
-        icon: 'success',
-        title: 'Your book has been saved',
-        showConfirmButton: false,
-        timer: 1500,
-      })
 });
 
 const addTodo = () => {
@@ -84,6 +74,7 @@ const makeTodo = (listItem) => {
         btnIncomplete.append(btnIncompleteIcon);
 
         btnIncomplete.addEventListener("click", () => {
+            successAction("Your book is moved to incomplete");
             undoTaksFromComplete(id);
         });
 
@@ -98,6 +89,7 @@ const makeTodo = (listItem) => {
         btnComplete.append(btnCompleteIcon);
 
         btnComplete.addEventListener("click", () => {
+            successAction("Your book is moved to complete");
             addTaksToComplete(id);
         });
 
@@ -128,7 +120,7 @@ const makeTodo = (listItem) => {
                     text: 'Your book has been deleted',
                     icon: 'success',
                     showConfirmButton: false,
-                    timer: 1300,
+                    timer: 1400,
                 })
             }
         });
@@ -193,3 +185,12 @@ const removeTaks = (id) => {
     listTodo.splice(todoTarget, 1);
     document.dispatchEvent(new Event(RENDER_EVENT));
 }
+
+const successAction = (actionMessage) => {
+    Swal.fire({
+        icon: 'success',
+        title: actionMessage,
+        showConfirmButton: false,
+        timer: 1500,
+      })
+};
