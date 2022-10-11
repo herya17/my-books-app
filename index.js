@@ -36,7 +36,7 @@ document.addEventListener(SUCCESS_SAVED, () => {
         icon: 'success',
         title: 'Your book has been saved',
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       })
 });
 
@@ -119,15 +119,17 @@ const makeTodo = (listItem) => {
             showCancelButton: true,
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.isConfirmed) {
                 removeTaks(id);
-                Swal.fire(
-                    'Deleted!',
-                    'Your book has been deleted.',
-                    'success'
-                )
+                Swal.fire({
+                    title: 'Deleted!',
+                    text: 'Your book has been deleted',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1200,
+                })
             }
         });
     });
