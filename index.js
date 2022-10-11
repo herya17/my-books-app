@@ -5,7 +5,7 @@ const listTodo = [];
 
 document.addEventListener("DOMContentLoaded", () => {
     const btnInputBook = document.getElementById("inputBook");
-    // const btnSearchBook = document.getElementById("searchBook");
+    const btnSearchBook = document.getElementById("searchBook");
     const searchBookInput = document.getElementById("searchBookInput");
 
     btnInputBook.addEventListener("submit", (event) => {
@@ -15,10 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
         document.dispatchEvent(new Event(RENDER_EVENT));
     });
 
-    // btnSearchBook.addEventListener("submit", (event) => {
-    //     event.preventDefault();
-    //     searchBook();
-    // });
+    btnSearchBook.addEventListener("submit", (event) => {
+        event.preventDefault();
+        searchBook();
+    });
 
     searchBookInput.addEventListener("input", () => {
         searchBook();
@@ -245,15 +245,6 @@ const saveDataToStorage = () => {
     }
 }
 
-const successAction = (actionMessage) => {
-    Swal.fire({
-        icon: 'success',
-        title: actionMessage,
-        showConfirmButton: false,
-        timer: 1500,
-    });
-}
-
 const searchBook = () => {
     const searchBookInput = document.getElementById("searchBookInput").value;
     const bookList = document.querySelectorAll("h3");
@@ -273,4 +264,13 @@ const searchBook = () => {
             book.parentElement.style.display = "none";
         }
     }
+}
+
+const successAction = (actionMessage) => {
+    Swal.fire({
+        icon: 'success',
+        title: actionMessage,
+        showConfirmButton: false,
+        timer: 1500,
+    });
 }
