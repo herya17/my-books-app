@@ -74,7 +74,7 @@ const makeTodo = (listItem) => {
         btnIncomplete.append(btnIncompleteIcon);
 
         btnIncomplete.addEventListener("click", () => {
-            successAction("Your book is moved to incomplete");
+            successAction("Book is moved to incomplete");
             undoTaksFromComplete(id);
         });
 
@@ -89,7 +89,7 @@ const makeTodo = (listItem) => {
         btnComplete.append(btnCompleteIcon);
 
         btnComplete.addEventListener("click", () => {
-            successAction("Your book is moved to complete");
+            successAction("Book is moved to complete");
             addTaksToComplete(id);
         });
 
