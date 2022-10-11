@@ -4,16 +4,22 @@ const KEY_STORAGE = "mybooks-storage";
 const listTodo = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-    const inputBook = document.getElementById("inputBook");
+    const btnInputBook = document.getElementById("inputBook");
+    const btnSearchBook = document.getElementById("searchBook");
 
-    document.dispatchEvent(new Event(CHECK_STORAGE));
-
-    inputBook.addEventListener("submit", (event) => {
+    btnInputBook.addEventListener("submit", (event) => {
         event.preventDefault();
         addTodo();
         successAction("Your book has been saved");
         document.dispatchEvent(new Event(RENDER_EVENT));
     });
+
+    btnSearchBook.addEventListener("submit", (event) => {
+        event.preventDefault();
+        searchBook();
+    });
+
+    document.dispatchEvent(new Event(CHECK_STORAGE));
 
     getDataFromStorage();
 });
@@ -241,4 +247,20 @@ const successAction = (actionMessage) => {
         showConfirmButton: false,
         timer: 1500,
     });
+}
+
+const searchBook = () => {
+    const searchBookInput = document.getElementById("searchBookInput").value.toLowerCase();
+    const bookList = document.querySelectorAll("h3");
+
+    for (let book of bookList) {
+        const title = book.textContent.toLowerCase();
+        console.log(title);
+
+        if (title.includes(searchBookInput)) {
+            book.parentElement.style.display = "block";
+        } else {
+            book.parentElement.style.display = "none";
+        }
+    }
 }
