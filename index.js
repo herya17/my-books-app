@@ -214,7 +214,7 @@ const isStorageExist = () => {
 
 const getDataFromStorage = () => {
     if (isStorageExist) {
-        const dataString = localStorage.getItem();
+        const dataString = localStorage.getItem(KEY_STORAGE);
         const dataObject = JSON.parse(dataString);
 
         if (dataObject !== null) {
