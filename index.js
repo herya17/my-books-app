@@ -34,7 +34,7 @@ document.addEventListener(RENDER_EVENT, () => {
 document.addEventListener(SUCCESS_SAVED, () => {
     Swal.fire({
         icon: 'success',
-        title: 'Your work has been saved',
+        title: 'Your book has been saved',
         showConfirmButton: false,
         timer: 1500
       })
