@@ -1,16 +1,21 @@
 const RENDER_EVENT = "render-todo";
+const CHECK_STORAGE = "check-storage";
+const KEY_STORAGE = "mybooks-storage";
 const listTodo = [];
 
 document.addEventListener("DOMContentLoaded", () => {
     const inputBook = document.getElementById("inputBook");
 
+    document.dispatchEvent(new Event(CHECK_STORAGE));
+
     inputBook.addEventListener("submit", (event) => {
         event.preventDefault();
         addTodo();
-
         successAction("Your book has been saved");
         document.dispatchEvent(new Event(RENDER_EVENT));
     });
+
+    getDataFromStorage();
 });
 
 document.addEventListener(RENDER_EVENT, () => {
@@ -30,18 +35,28 @@ document.addEventListener(RENDER_EVENT, () => {
     }
 });
 
+document.addEventListener(CHECK_STORAGE, () => {
+    if (isStorageExist) {
+        Swal.fire({
+            text: "Your browser is not support web storage",
+            icon: "warning",
+            showConfirmButton: true,
+            confirmButtonColor: '#3085d6',
+        });
+    }
+});
+
 const addTodo = () => {
     const inputBookTitle = document.getElementById("inputBookTitle").value;
     const inputBookAuthor = document.getElementById("inputBookAuthor").value;
     const inputBookYear = document.getElementById("inputBookYear").value;
     const inputBookIsComplete = document.getElementById("inputBookIsComplete").checked;
-
     const id = +new Date();
 
     const returnTodoObject = todoObject(id, inputBookTitle, inputBookAuthor, inputBookYear, inputBookIsComplete);
     listTodo.push(returnTodoObject);
 
-    console.log(listTodo);
+    saveDataToStorage();
 }
 
 const makeTodo = (listItem) => {
@@ -74,8 +89,8 @@ const makeTodo = (listItem) => {
         btnIncomplete.append(btnIncompleteIcon);
 
         btnIncomplete.addEventListener("click", () => {
-            successAction("Book is moved to incomplete");
             undoTaksFromComplete(id);
+            successAction("Book is moved to incomplete");
         });
 
         containerAction.append(btnIncomplete);
@@ -89,8 +104,8 @@ const makeTodo = (listItem) => {
         btnComplete.append(btnCompleteIcon);
 
         btnComplete.addEventListener("click", () => {
-            successAction("Book is moved to complete");
             addTaksToComplete(id);
+            successAction("Book is moved to complete");
         });
 
         containerAction.append(btnComplete);
@@ -166,6 +181,7 @@ const addTaksToComplete = (id) => {
 
     todoTarget.isComplete = true;
     document.dispatchEvent(new Event(RENDER_EVENT));
+    saveDataToStorage();
 }
 
 const undoTaksFromComplete = (id) => {
@@ -175,6 +191,7 @@ const undoTaksFromComplete = (id) => {
 
     todoTarget.isComplete = false;
     document.dispatchEvent(new Event(RENDER_EVENT));
+    saveDataToStorage();
 }
 
 const removeTaks = (id) => {
@@ -184,6 +201,37 @@ const removeTaks = (id) => {
 
     listTodo.splice(todoTarget, 1);
     document.dispatchEvent(new Event(RENDER_EVENT));
+    saveDataToStorage();
+}
+
+const isStorageExist = () => {
+    if (typeof Storage !== undefined) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+const getDataFromStorage = () => {
+    if (isStorageExist) {
+        const dataString = localStorage.getItem();
+        const dataObject = JSON.parse(dataString);
+
+        if (dataObject !== null) {
+            for (const data of dataObject) {
+                listTodo.push(data);
+            }
+        }
+
+        document.dispatchEvent(new Event(RENDER_EVENT));
+    }
+}
+
+const saveDataToStorage = () => {
+    if (isStorageExist) {
+        const dataString = JSON.stringify(listTodo);
+        localStorage.setItem(KEY_STORAGE, dataString);
+    }
 }
 
 const successAction = (actionMessage) => {
@@ -192,5 +240,5 @@ const successAction = (actionMessage) => {
         title: actionMessage,
         showConfirmButton: false,
         timer: 1500,
-      })
-};
+    });
+}
