@@ -36,7 +36,7 @@ document.addEventListener(SUCCESS_SAVED, () => {
         icon: 'success',
         title: 'Your work has been saved',
         showConfirmButton: false,
-        timer: 1000
+        timer: 1500
       })
 });
 
@@ -118,7 +118,7 @@ const makeTodo = (listItem) => {
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
-            cancelButtonColor: '#716add',
+            cancelButtonColor: '#3085d6',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
