@@ -128,7 +128,7 @@ const makeTodo = (listItem) => {
                     text: 'Your book has been deleted',
                     icon: 'success',
                     showConfirmButton: false,
-                    timer: 1200,
+                    timer: 1300,
                 })
             }
         });
