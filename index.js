@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
         addTodo();
         successAction("Your book has been saved");
         document.dispatchEvent(new Event(RENDER_EVENT));
+
+        btnInputBook.reset();
     });
 
     btnSearchBook.addEventListener("submit", (event) => {
@@ -68,11 +70,6 @@ const addTodo = () => {
     listTodo.push(returnTodoObject);
 
     saveDataToStorage();
-
-    inputBookTitle = "";
-    inputBookAuthor = "";
-    inputBookYear = "";
-    inputBookIsComplete = false;
 }
 
 const makeTodo = (listItem) => {
