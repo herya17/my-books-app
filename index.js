@@ -58,16 +58,21 @@ document.addEventListener(CHECK_STORAGE, () => {
 });
 
 const addTodo = () => {
-    const inputBookTitle = document.getElementById("inputBookTitle").value;
-    const inputBookAuthor = document.getElementById("inputBookAuthor").value;
-    const inputBookYear = document.getElementById("inputBookYear").value;
-    const inputBookIsComplete = document.getElementById("inputBookIsComplete").checked;
+    let inputBookTitle = document.getElementById("inputBookTitle").value;
+    let inputBookAuthor = document.getElementById("inputBookAuthor").value;
+    let inputBookYear = document.getElementById("inputBookYear").value;
+    let inputBookIsComplete = document.getElementById("inputBookIsComplete").checked;
     const id = +new Date();
 
     const returnTodoObject = todoObject(id, inputBookTitle, inputBookAuthor, inputBookYear, inputBookIsComplete);
     listTodo.push(returnTodoObject);
 
     saveDataToStorage();
+
+    inputBookTitle = "";
+    inputBookAuthor = "";
+    inputBookYear = "";
+    inputBookIsComplete = false;
 }
 
 const makeTodo = (listItem) => {
