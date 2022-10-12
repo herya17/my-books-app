@@ -1,30 +1,20 @@
 const RENDER_EVENT = "render-todo";
+const SEARCH_BOOK = "search-books";
 const CHECK_STORAGE = "check-storage";
 const KEY_STORAGE = "mybooks-storage";
 const listTodo = [];
 
 document.addEventListener("DOMContentLoaded", () => {
     const btnInputBook = document.getElementById("inputBook");
-    const btnSearchBook = document.getElementById("searchBook");
-    const searchBookInput = document.getElementById("searchBookInput");
 
     btnInputBook.addEventListener("submit", (event) => {
         event.preventDefault();
         addTodo();
         successAction("Your book has been saved");
-        document.dispatchEvent(new Event(RENDER_EVENT));
-
         btnInputBook.reset();
     });
 
-    btnSearchBook.addEventListener("submit", (event) => {
-        event.preventDefault();
-        searchBook();
-    });
-
-    searchBookInput.addEventListener("input", () => {
-        searchBook();
-    });
+    document.dispatchEvent(new Event(SEARCH_BOOK));
 
     document.dispatchEvent(new Event(CHECK_STORAGE));
 
@@ -48,6 +38,26 @@ document.addEventListener(RENDER_EVENT, () => {
     }
 });
 
+document.addEventListener(SEARCH_BOOK, () => {
+    const searchBookInput = document.getElementById("searchBookInput");
+    const btnSearchBook = document.getElementById("searchBook");
+
+    searchBookInput.addEventListener("input", () => {
+        searchBook();
+    });
+
+    btnSearchBook.addEventListener("submit", (event) => {
+        event.preventDefault();
+        btnSearchBook.reset();
+        document.dispatchEvent(new Event(RENDER_EVENT));
+    });
+
+    searchBookInput.addEventListener("focus", () => {
+        const btnSearchBookIcon = document.querySelector(".icon");
+        btnSearchBookIcon.innerText = "close";
+    });
+});
+
 document.addEventListener(CHECK_STORAGE, () => {
     if (!isStorageExist) {
         Swal.fire({
@@ -68,6 +78,8 @@ const addTodo = () => {
 
     const returnTodoObject = todoObject(id, inputBookTitle, inputBookAuthor, inputBookYear, inputBookIsComplete);
     listTodo.push(returnTodoObject);
+
+    document.dispatchEvent(new Event(RENDER_EVENT));
 
     saveDataToStorage();
 }
@@ -258,7 +270,6 @@ const searchBook = () => {
 
     for (let book of bookList) {
         const title = book.textContent.toLowerCase();
-        console.log(title);
 
         if (title.includes(searchBookInput.toLowerCase())) {
             book.parentElement.style.display = "block";

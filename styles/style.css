@@ -77,14 +77,13 @@ section {
 	cursor: pointer;
 }
 
-.search-section label {
+#labelSearchBook {
 	padding: 5px 0;
 	display: flex;
 }
 
-.search-section input {
+#searchBookInput {
 	flex-basis: 84%;
-	width: 85%;
 	padding: 12px;
 	border-radius: 5px;
 	border: 1px solid;
@@ -92,10 +91,9 @@ section {
 	border-color: rgba(0,0,0,0.5);
 }
 
-.search-section button {
+#searchSubmit {
 	flex-basis: 16%;
 	margin-left: 7px;
-	width: 15%;
 	border-radius: 5px;
 	border: 1px solid;
 	border-color: rgb(0,0,0);
@@ -104,7 +102,6 @@ section {
 	font-size: 30px;
 	cursor: pointer;
 	padding-top: 7px;
-	/* padding: 8px 10px 4px 10px; */
 }
 
 .book-item {
